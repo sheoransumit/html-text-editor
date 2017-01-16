@@ -20,8 +20,7 @@ li:nth-child(even) {color: blue}
 	<div class="feeds" id="feed"></div>
 </div>
 <div id='test' style="visibility: hidden;"></div>
-<footer id="footnote">
-</footer>
+<footer id="footnote"></footer>
 <script>
 document.onload = onStart();
 function onStart(){
@@ -193,6 +192,12 @@ function getTags(htmlBody){
 	// var doc = parser.parseFromString(xmlString, "text/xml");
 }
 function postFooter(){
+	// Get the <div> element with id="notepad"
+	var footlist = document.getElementById("footnote");
+	// As long as <div> has a child node, remove it
+	while (footlist.hasChildNodes()) {   
+	    footlist.removeChild(footlist.firstChild);
+	}
 	var foot = document.getElementById('feedPosts');
 	foot = foot.cloneNode(true);
 	foot = foot.getElementsByTagName('a');
