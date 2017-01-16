@@ -1,27 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style type="text/css">
-li:nth-child(odd) {color: red}
-li:nth-child(even) {color: blue}
-</style>
-</head>
-
-<body>
-<header><h2>Text Editor</h2></header>
-<!-- <div id="notepad" contenteditable="true" white-space="pre-wrap" onkeyup="runScript(event)" ></div> -->
-<div id="notepad" contenteditable="true" white-space="pre-wrap" ></div>
-<button id="boldFont" onclick="makeBold()">Bold</button>
-<button id="underlineFont" onclick="makeUnderline()">Underline</button>
-<button id="colorFont" onclick="makeRed()">Red</button>
-<!-- <button id="submitPost" onclick="post()">Post</button> -->
-<button id="submitPost" onclick="post()">Post</button>
-<div id="feedPosts">
-	<div class="feeds" id="feed"></div>
-</div>
-<div id='test' style="visibility: hidden;"></div>
-<footer id="footnote"></footer>
-<script>
 document.onload = onStart();
 function onStart(){
 	// Get the <div> element with id="notepad"
@@ -213,10 +189,3 @@ function postFooter(){
 	var newFooter = document.getElementById('footnote');
 	newFooter.appendChild(newFooterList);
 }
-</script>
-</body>
-</html>
-
-<!-- Doubts:
-1. created elements using javascript doesnt behave normally following lines it should execute itself as.
-2.  -->
