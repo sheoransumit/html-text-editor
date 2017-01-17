@@ -2,24 +2,31 @@
 <html>
 <head>
 <!-- Stylings -->
-<style type="text/css" href="styles.css"></style>
+<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
-<header><h2>Text Editor</h2></header>
-<!-- <div id="notepad" contenteditable="true" white-space="pre-wrap" onkeyup="runScript(event)" ></div> -->
-<div id="notepad" contenteditable="true" white-space="pre-wrap" ></div>
+<header><h1>Text Editor</h1></header>
+
+<div id="postbox">
+<div id="notepad" contenteditable="true" white-space="pre-wrap" onkeyup="runScript(event)" ></div>
+<div id="toolbar">
+<button id="shufflePara" onclick="dragAndDrop()">Rearrange content</button>
 <button id="boldFont" onclick="makeBold()">Bold</button>
 <button id="underlineFont" onclick="makeUnderline()">Underline</button>
 <button id="colorFont" onclick="makeRed()">Red</button>
-<!-- <button id="submitPost" onclick="post()">Post</button> -->
 <button id="submitPost" onclick="post()">Post</button>
+</div>
+</div>
+<div class="document">
 <div id="feedPosts">
 	<div class="feeds" id="feed"></div>
 </div>
 <div id='test' style="visibility: hidden;"></div>
 <footer id="footnote"></footer>
+</div>
 <!-- Scripts -->
 <script type="text/javascript" src="script.js"></script>
 </body>
+
 </html>

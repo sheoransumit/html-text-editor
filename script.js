@@ -7,9 +7,10 @@ function onStart(){
 	    list.removeChild(list.firstChild);
 	}
 	var newPost = document.createElement('p');
-	var t = document.createTextNode("Drop text here..");
+	var t = document.createTextNode("Write text here..");
 	// newPost.setAttribute("id", "contentid");
 	newPost.setAttribute("class", "para");
+	newPost.setAttribute("id", "contentid0");
 	newPost.setAttribute("draggable", "true");
 	newPost.setAttribute("ondragstart", "drag(event)");
 	newPost.appendChild(t);
@@ -21,30 +22,71 @@ function onStart(){
 	    testlist.removeChild(testlist.firstChild);
 	}
 }
-// function runScript(e) {
-//     if (e.keyCode == 13) {
-//    	    var list = document.getElementsByClassName("para");
-// 		for (var i = 0; i < list.length; i++) {
-// 			list[i].setAttribute("id", "contentid" + i);
-// 		}
-// 		addDrop();
-//     }
-// }
-// function addDrop(){
-// 	var newItem;
-// 	var textnode;
-// 	var newlist = document.getElementsByClassName("para");
-// 	var paraDiv = document.getElementById("notepad");
-// 	for (var j = 0; j <= newlist.length; j++) {
-// 		newItem = document.createElement("p");
-// 		newItem.id = "droploc" + j;
-// 		newItem.setAttribute("ondrop", "drop(event)");
-// 		newItem.setAttribute("ondragover", "allowDrop(event)");
-// 		// var t = document.createTextNode("Drop text here..");
-// 		// newItem.appendChild(t);
-// 		paraDiv.insertBefore(newItem, newlist[j]);
-// 	}
-// }
+function runScript(e) {
+    if (e.keyCode == 13) {
+   	    var list = document.getElementsByClassName("para");
+		for (var i = 0; i < list.length; i++) {
+			list[i].setAttribute("id", "contentid" + i);
+		}
+    }
+}
+function dragAndDrop(){
+	if(document.getElementById('contentid0').getAttribute("contenteditable")=='false'){
+		dragdropDone();
+	}
+	else{
+		addDrop();
+	}
+}
+function addDrop(){
+	var newItem;
+	var textnode;
+	var newlist = document.getElementsByClassName("para");
+	var paraDiv = document.getElementById("notepad");
+	for (var j = 0; j <= newlist.length; j++) {
+		console.log(j);
+		newItem = document.createElement("p");
+		newItem.id = "droploc" + j;
+		newItem.setAttribute("class", "drop");
+		newItem.setAttribute("ondrop", "drop(event)");
+		newItem.setAttribute("ondragover", "allowDrop(event)");
+		// var t = document.createTextNode("Dropzone");
+		// newItem.appendChild(t);
+		paraDiv.insertBefore(newItem, newlist[j]);
+		console.log(newlist[j]);
+		if (j==newlist.length) {break;};
+		newlist[j].setAttribute("onclick", "document.getElementById(this.id).focus();");
+		newlist[j].setAttribute("contenteditable", "false");
+	}
+	addBorder();
+	isEnabled();
+}
+function addBorder(){
+	var paraList = document.getElementsByClassName('para');
+	var dropList = document.getElementsByClassName('drop');
+	for(var x=0; x<paraList.length; x++){
+		paraList[x].setAttribute("style", "border: 1px solid #112233; padding:5px;");
+	}
+		for(var y=0; y<dropList.length; y++){
+		dropList[y].setAttribute("style", "border: 1px solid #112233; padding:10px;");
+	}
+}
+function dragdropDone(){
+	var paraList = document.getElementsByClassName('para');
+	for(var z=0; z<paraList.length;z++){
+		paraList[z].removeAttribute('contenteditable');
+		paraList[z].removeAttribute('style');
+		document.getElementById("notepad").insertBefore(paraList[z], document.getElementById("notepad").childNodes[z]);
+	}
+	var dropList = document.getElementsByClassName('drop');
+	for(var y=0; y<dropList.length; y++){
+		console.log(y);
+		console.log(dropList.length);
+		document.getElementById('notepad').removeChild(dropList[y]);
+		y--;
+	}
+}
+
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -57,8 +99,19 @@ function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("html");
     ev.target.appendChild(document.getElementById(data));
+    ev.target.removeAttribute('ondrop');
+    ev.target.removeAttribute('ondragover');
 }
-
+function isEnabled() {
+    setInterval(function(){
+    	if(document.getElementById('contentid0').getAttribute("contenteditable")=='false'){
+    		document.getElementById("shufflePara").innerHTML = "Disable DragDrop";
+    	}
+    	else{
+    		document.getElementById("shufflePara").innerHTML = "Enable DragDrop";
+    	}
+ }, 500);
+}
 function makeBold(){
 	document.execCommand('bold');
 	isBold();

@@ -1,2 +1,29 @@
+body{
+	background-color: #efefef;
+}
+h1{
+	text-align: center;
+}
+#postbox{
+	padding: 10px;
+	background-color: #ffffff;
+}
+#notepad{
+	padding: 2px;
+	border-top: 2px solid #afafaf;
+	border-bottom: 2px solid #afafaf;
+}
+
+#toolbar{
+	padding: 5px;
+}
+#submitPost{
+	float: right;
+}
+.document {
+	background-color: #ffffff;
+	margin-top: 5px;
+	padding: 10px;
+}
 li:nth-child(odd) {color: red}
 li:nth-child(even) {color: blue}
